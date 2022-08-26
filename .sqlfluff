@@ -1,0 +1,25 @@
+[sqlfluff]
+dialect = tsql
+templater = dbt
+exclude_rules = L001, L014, L031, L034, L044,L057
+
+[sqlfluff:rules]
+tab_space_size = 4
+max_line_length = 120
+indent_unit = space
+comma_style = trailing
+allow_scalar = True
+single_table_references = consistent
+unquoted_identifiers_policy = all
+
+[sqlfluff:rules:L010]
+# Keywords
+capitalisation_policy = upper
+
+[sqlfluff:rules:L030]
+# Function names
+capitalisation_policy = upper
+
+[sqlfluff:rules:L040]
+# Null & Boolean Literals
+capitalisation_policy = upper
