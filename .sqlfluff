@@ -1,5 +1,5 @@
 [sqlfluff]
-dialect = tsql
+dialect = postgres
 templater = dbt
 exclude_rules = L001, L014, L031, L034, L044,L057
 

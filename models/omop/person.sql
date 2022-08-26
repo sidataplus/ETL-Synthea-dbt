@@ -1,22 +1,22 @@
 SELECT
     ROW_NUMBER()OVER(ORDER BY p.id) AS person_id,
-    CASE upper(p.gender)
+    CASE UPPER(p.gender)
         WHEN 'M' THEN 8507
         WHEN 'F' THEN 8532
     END AS gender_concept_id,
-    date_part('year', p.birthdate) AS year_of_birth,
-    date_part('month', p.birthdate) AS month_of_birth,
-    date_part('day', p.birthdate) AS day_of_birth,
+    DATE_PART('year', p.birthdate) AS year_of_birth,
+    DATE_PART('month', p.birthdate) AS month_of_birth,
+    DATE_PART('day', p.birthdate) AS day_of_birth,
     p.birthdate AS birth_datetime,
-    CASE upper(p.race)
+    CASE UPPER(p.race)
         WHEN 'WHITE' THEN 8527
         WHEN 'BLACK' THEN 8516
         WHEN 'ASIAN' THEN 8515
         ELSE 0
     END AS race_concept_id,
     CASE
-        WHEN upper(p.ethnicity) = 'HISPANIC' THEN 38003563
-        WHEN upper(p.ethnicity) = 'NONHISPANIC' THEN 38003564
+        WHEN UPPER(p.ethnicity) = 'HISPANIC' THEN 38003563
+        WHEN UPPER(p.ethnicity) = 'NONHISPANIC' THEN 38003564
         ELSE 0
     END AS ethnicity_concept_id,
     NULL AS location_id,

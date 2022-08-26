@@ -5,3 +5,6 @@ sources:
     schema: source
     tables:
       - name: patients
+      - name: encounters
+      - name: providers
+
