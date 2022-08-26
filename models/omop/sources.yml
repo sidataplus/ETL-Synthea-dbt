@@ -7,4 +7,10 @@ sources:
       - name: patients
       - name: encounters
       - name: providers
-
+      - name: conditions
+  - name: cdm
+    schema: cdm
+    tables:
+      - name: concept
+      - name: concept_relationship
+      - name: source_to_concept_map
