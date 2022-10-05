@@ -8,7 +8,7 @@ sources:
       - name: encounters
       - name: providers
       - name: conditions
-  - name: cdm
+  - name: vocab
     schema: cdm
     tables:
       - name: concept
