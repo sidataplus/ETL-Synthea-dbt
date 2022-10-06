@@ -1,0 +1,36 @@
+version: 2
+
+##
+# Test cmd:
+##
+# dbt test --select +omop --exclude tag:mapping
+models:
+  - name: person
+    columns:
+      - name: person_id
+        tests:
+          - unique
+          - not_null
+      - name: gender_concept_id
+        tests:
+          - not_null
+          # - accepted_values:
+          #     values: ['8507', '8532']
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: year_of_birth
+        tests:
+          - not_null
+      - name: race_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: ethnicity_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
