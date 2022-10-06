@@ -1,16 +1,23 @@
+WITH cte_concept_code AS(
+    SELECT
+        *, 
+
+        CASE av.encounterclass
+            WHEN 'ambulatory' THEN 'OP'
+            WHEN 'emergency' THEN 'ER'
+            WHEN 'inpatient' THEN 'IP'
+            WHEN 'wellness' THEN 'OP'
+            WHEN 'urgentcare' THEN 'ER' 
+            WHEN 'outpatient' THEN 'OP'
+            ELSE 'No matching concept'
+        END AS visit_concept_code
+    FROM {{ ref('all_visits') }} AS av
+)
 SELECT
     av.visit_occurrence_id AS visit_occurrence_id,
     p.person_id AS person_id, 
 
-    CASE lower(av.encounterclass) 
-        WHEN 'ambulatory' THEN 9202
-        WHEN 'emergency' THEN 9203
-        WHEN 'inpatient' THEN 9201
-        WHEN 'wellness' THEN 9202
-        WHEN 'urgentcare' THEN 9203 
-        WHEN 'outpatient' THEN 9202
-        ELSE 0
-    END AS visit_concept_id,
+    visit_concept.concept_id AS visit_concept_id,
     av.visit_start_date AS visit_start_date,
     av.visit_start_date AS visit_start_datetime,
     av.visit_end_date AS visit_end_date,
@@ -27,7 +34,8 @@ SELECT
     lag(av.visit_occurrence_id) 
     OVER(PARTITION BY p.person_id
                       ORDER BY av.visit_start_date) AS preceding_visit_occurrence_id
-FROM {{ ref('all_visits') }} AS av
+FROM cte_concept_code AS av
+{{ map_concept(cdm_table='av', vocabulary_id='Visit', concept_code_field='visit_concept_code') }}
 INNER JOIN {{ ref('person') }} AS p
     ON av.patient = p.person_source_value
 INNER JOIN {{ source('synthea', 'encounters') }} AS e
