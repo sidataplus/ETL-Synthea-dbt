@@ -8,9 +8,17 @@ sources:
       - name: encounters
       - name: providers
       - name: conditions
+      - name: allergies
+      - name: observations
+      - name: procedures
+      - name: devices
+      - name: medications
+      - name: immunizations
   - name: cdm
     schema: cdm
     tables:
       - name: concept
       - name: concept_relationship
+      - name: concept_ancestor
       - name: source_to_concept_map
+      - name: vocabulary
