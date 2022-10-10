@@ -63,7 +63,7 @@ IP_VISITS AS (
         T2.encounterclass,
         T2.VISIT_START_DATE,
         T2.VISIT_END_DATE
-        {# INTO @cdm_schema.IP_VISITS #}
+        {# INTO {{ ref('IP_VISITS') }} #}
     FROM (
             SELECT
                 encounter_id,
@@ -87,7 +87,7 @@ ER_VISITS AS (
         T2.encounterclass,
         T2.VISIT_START_DATE,
         T2.VISIT_END_DATE
-        {# INTO @cdm_schema.ER_VISITS #}
+        {# INTO {{ ref('ER_VISITS') }} #}
     FROM (
             SELECT
                 min(encounter_id) AS encounter_id,
@@ -135,7 +135,7 @@ OP_VISITS AS (
         encounterclass,
         VISIT_START_DATE,
         max(VISIT_END_DATE) AS VISIT_END_DATE
-        {# INTO @cdm_schema.OP_VISITS #}
+        {# INTO {{ ref('OP_VISITS') }} #}
     FROM CTE_VISITS_DISTINCT
     GROUP BY patient, encounterclass, VISIT_START_DATE
 )
