@@ -20,3 +20,8 @@ models:
   etl_synthea_dbt:
     omop:
       +materialized: table
+    staging:
+      schema: stg
+      +materialized: view
+
+# dbt run --select +omop --exclude tag:mapping

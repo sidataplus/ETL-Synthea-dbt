@@ -14,7 +14,7 @@ sources:
       - name: devices
       - name: medications
       - name: immunizations
-  - name: cdm
+  - name: vocab
     schema: cdm
     tables:
       - name: concept

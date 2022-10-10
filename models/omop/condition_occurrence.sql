@@ -12,8 +12,8 @@ SELECT
     c.visit_occurrence_id_new AS visit_occurrence_id,
     c.visit_occurrence_id_new + 1000000 AS visit_detail_id,
     c.code AS condition_source_value,
-    srctosrcvm.source_concept_id AS condition_source_concept_id,
-    NULL AS condition_status_source_value,
+    cast(srctosrcvm.source_concept_id as integer) AS condition_source_concept_id,
+    cast(NULL as integer) AS condition_status_source_value,
     0 AS condition_status_concept_id
 FROM {{ ref('stg_condition_occurrence') }} AS c
 INNER JOIN {{ ref('source_to_standard_vocab_map') }} AS srctostdvm

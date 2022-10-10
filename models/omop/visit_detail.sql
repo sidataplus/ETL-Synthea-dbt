@@ -32,7 +32,7 @@ SELECT
     0 AS visit_detail_source_concept_id, 
     NULL AS admitting_source_value, 
     NULL AS discharge_to_source_value,
-    NULL AS visit_detail_parent_id,
+    cast(NULL as integer) AS parent_visit_detail_id,
     av.visit_occurrence_id AS visit_occurrence_id
 FROM {{ ref('all_visits') }} AS av
 INNER JOIN {{ ref('person') }} AS p

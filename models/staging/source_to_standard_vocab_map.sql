@@ -1,8 +1,9 @@
  {{ config(
     materialized = 'table',
+    tags = 'mapping',
     indexes=[
       {'columns': ['source_code']},
-      {'columns': ['source_vocabulary_id']}
+      {'columns': ['source_vocabulary_id', 'source_domain_id'], 'type': 'btree'}
     ]
 ) }} 
 
@@ -29,12 +30,12 @@ WITH CTE_VOCAB_MAP AS (
         c1.concept_class_id AS target_concept_class_id,
         c1.invalid_reason AS target_invalid_reason,
         c1.standard_concept AS target_standard_concept
-    FROM {{ source('cdm', 'concept') }} AS c
-    INNER JOIN {{ source('cdm', 'concept_relationship') }} AS cr
+    FROM {{ source('vocab', 'concept') }} AS c
+    INNER JOIN {{ source('vocab', 'concept_relationship') }} AS cr
         ON c.concept_id = cr.concept_id_1
             AND cr.invalid_reason IS NULL
             AND lower(cr.relationship_id) = 'maps to'
-    INNER JOIN {{ source('cdm', 'concept') }} AS c1
+    INNER JOIN {{ source('vocab', 'concept') }} AS c1
         ON cr.concept_id_2 = c1.concept_id
             AND c1.invalid_reason IS NULL
     UNION
@@ -55,10 +56,10 @@ WITH CTE_VOCAB_MAP AS (
         c2.concept_class_id AS target_concept_class_id,
         c2.invalid_reason AS target_invalid_reason,
         c2.standard_concept AS target_standard_concept
-    FROM {{ source('cdm', 'source_to_concept_map') }} AS stcm
-    LEFT OUTER JOIN {{ source('cdm', 'concept') }} AS c1
+    FROM {{ source('vocab', 'source_to_concept_map') }} AS stcm
+    LEFT OUTER JOIN {{ source('vocab', 'concept') }} AS c1
         ON c1.concept_id = stcm.source_concept_id
-    LEFT OUTER JOIN {{ source('cdm', 'concept') }} AS c2
+    LEFT OUTER JOIN {{ source('vocab', 'concept') }} AS c2
         ON c2.concept_id = stcm.target_concept_id
     WHERE stcm.invalid_reason IS NULL
 )
