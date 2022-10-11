@@ -1,3 +1,7 @@
+ {{ config(
+    tags = 'STEM_tbl',
+) }} 
+
 SELECT
     row_number()OVER(ORDER BY c.person_id) AS condition_occurrence_id,
     c.person_id AS person_id,

@@ -1,3 +1,7 @@
+ {{ config(
+    tags = 'STEM_tbl',
+) }} 
+
 SELECT
     row_number()OVER(ORDER BY person_id) AS device_exposure_id,
     p.person_id AS person_id,
@@ -13,7 +17,10 @@ SELECT
     fv.visit_occurrence_id_new AS visit_occurrence_id,
     fv.visit_occurrence_id_new + 1000000 AS visit_detail_id,
     d.code AS device_source_value,
-    srctosrcvm.source_concept_id AS device_source_concept_id
+    srctosrcvm.source_concept_id AS device_source_concept_id,
+    cast(NULL AS int) AS unit_concept_id,
+    NULL AS unit_source_value,
+    cast(NULL AS int) AS unit_source_concept_id,
 
 FROM {{ source('synthea', 'devices') }} AS d
 INNER JOIN {{ ref('source_to_standard_vocab_map') }} AS srctostdvm

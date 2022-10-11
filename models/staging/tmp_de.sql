@@ -25,8 +25,8 @@ ctePreDrugTarget(
         ---Add 1 day to the drug_exposure_start_date since there is no end_date or INTERVAL for the days_supply
         ) AS drug_exposure_end_date
     FROM {{ ref('drug_exposure') }} AS d
-    INNER JOIN {{ source('cdm', 'concept_ancestor') }} AS ca ON ca.descendant_concept_id = d.drug_concept_id
-    INNER JOIN {{ source('cdm', 'concept') }} AS c ON ca.ancestor_concept_id = c.concept_id
+    INNER JOIN {{ source('vocab', 'concept_ancestor') }} AS ca ON ca.descendant_concept_id = d.drug_concept_id
+    INNER JOIN {{ source('vocab', 'concept') }} AS c ON ca.ancestor_concept_id = c.concept_id
     WHERE c.vocabulary_id = 'RxNorm' ---8 selects RxNorm from the vocabulary_id
         AND c.concept_class_id = 'Ingredient'
         AND d.drug_concept_id != 0 ---Our unmapped drug_concept_id's are set to 0, so we don't want different drugs wrapped up in the same era

@@ -1,3 +1,7 @@
+ {{ config(
+    tags = 'STEM_tbl',
+) }} 
+
 SELECT
     row_number()OVER(ORDER BY p.person_id) AS procedure_occurrence_id,
     p.person_id AS person_id,

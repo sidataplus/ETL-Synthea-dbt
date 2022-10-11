@@ -1,3 +1,7 @@
+ {{ config(
+    tags = 'STEM_tbl',
+) }} 
+
 SELECT
     row_number()OVER(ORDER BY person_id) AS drug_exposure_id,
     person_id,

@@ -262,6 +262,309 @@ models:
           - relationships:
               to: source('vocab', 'concept')
               field: concept_id
+  - name: drug_exposure
+    columns:
+      - name: drug_exposure_id
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: drug_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: drug_exposure_start_date
+        tests:
+          - not_null
+      - name: drug_exposure_end_date
+        tests:
+          - not_null
+      - name: drug_type_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: route_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: provider_id
+        tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+      - name: visit_occurrence_id
+        tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: drug_source_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+  - name: procedure_occurrence
+    columns:
+      - name: procedure_occurrence_id
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: procedure_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: procedure_date
+        tests:
+          - not_null
+      - name: procedure_type_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: modifier_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: provider_id
+        tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+      - name: visit_occurrence_id
+        tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: procedure_source_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+  - name: device_exposure
+    columns:
+      - name: device_exposure_id
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: device_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: device_exposure_start_date
+        tests:
+          - not_null
+      - name: device_type_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: provider_id
+        tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+      - name: visit_occurrence_id
+        tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: device_source_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: unit_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: unit_source_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+  - name: measurement
+    columns:
+      - name: measurement_id
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: measurement_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: measurement_date
+        tests:
+          - not_null
+      - name: measurement_type_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: operator_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: value_as_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: unit_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: provider_id
+        tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+      - name: visit_occurrence_id
+        tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: measurement_source_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: unit_source_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: meas_event_field_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+  - name: observation
+    columns:
+      - name: observation_id
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: observation_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: observation_date
+        tests:
+          - not_null
+      - name: observation_type_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: value_as_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: qualifier_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: unit_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: provider_id
+        tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+      - name: visit_occurrence_id
+        tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: observation_source_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: obs_event_field_concept_id
+        tests:
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
   # Health System Data Table
   - name: provider
     columns:
@@ -289,3 +592,52 @@ models:
           - relationships:
               to: source('vocab', 'concept')
               field: concept_id
+  # Standardized Derived Elements
+  - name: drug_era
+    columns:
+      - name: drug_era_id
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: drug_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: drug_era_start_date
+        tests:
+          - not_null
+      - name: drug_era_end_date
+        tests:
+          - not_null
+  - name: condition_era
+    columns:
+      - name: condition_era_id
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: condition_concept_id
+        tests:
+          - not_null
+          - relationships:
+              to: source('vocab', 'concept')
+              field: concept_id
+      - name: condition_era_start_date
+        tests:
+          - not_null
+      - name: condition_era_end_date
+        tests:
+          - not_null

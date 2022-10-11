@@ -9,5 +9,5 @@ SELECT
     now() AS cdm_release_date,
     '@cdm_version' AS cdm_version,
     vocabulary_version
-FROM {{ source('cdm', 'vocabulary') }}
+FROM {{ source('vocab', 'vocabulary') }}
 WHERE vocabulary_id = 'None'

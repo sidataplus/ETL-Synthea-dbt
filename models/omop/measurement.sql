@@ -1,3 +1,7 @@
+ {{ config(
+    tags = 'STEM_tbl',
+) }} 
+
 SELECT 
     row_number()OVER(ORDER BY person_id) AS measurement_id,
     person_id,
@@ -71,7 +75,7 @@ FROM (
         38000267 AS measurement_type_concept_id,
         0 AS operator_concept_id,
         CASE 
-            WHEN o.value ~ '^([0-9]+[.]?[0-9]*|[.][0-9]+)$' = 1 
+            WHEN o.value ~ '^([0-9]+[.]?[0-9]*|[.][0-9]+)$' = '1'
                 THEN cast(o.value AS float) 
             ELSE cast(NULL AS float) 
         END AS value_as_number,
