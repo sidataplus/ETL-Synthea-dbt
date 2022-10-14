@@ -1,3 +1,7 @@
+ {{ config(
+    tags = 'STEM_tbl',
+) }} 
+
 SELECT
     row_number()OVER(ORDER BY person_id) AS observation_id,
     person_id,
@@ -16,7 +20,10 @@ SELECT
     observation_source_value,
     observation_source_concept_id,
     unit_source_value,
-    qualifier_source_value
+    qualifier_source_value,
+    NULL AS value_source_value,
+    cast(NULL AS int) AS observation_event_id,
+    cast(NULL AS int) AS obs_event_field_concept_id
 
 FROM (
     SELECT

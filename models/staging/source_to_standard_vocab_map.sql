@@ -3,7 +3,7 @@
     tags = 'mapping',
     indexes=[
       {'columns': ['source_code']},
-      {'columns': ['source_vocabulary_id', 'source_domain_id'], 'type': 'btree'}
+      {'columns': ['target_domain_id', 'target_vocabulary_id', 'target_standard_concept', 'source_vocabulary_id', 'source_domain_id'], 'type': 'btree'}
     ]
 ) }} 
 
