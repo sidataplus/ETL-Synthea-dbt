@@ -20,14 +20,5 @@ SELECT
     cast(NULL as integer) AS condition_status_source_value,
     0 AS condition_status_concept_id
 FROM {{ ref('stg_condition_occurrence') }} AS c
-INNER JOIN {{ ref('source_to_standard_vocab_map') }} AS srctostdvm
-    ON srctostdvm.source_code = c.code
-        AND srctostdvm.target_domain_id = 'Condition'
-        AND srctostdvm.target_vocabulary_id = 'SNOMED'
-        AND srctostdvm.source_vocabulary_id = 'SNOMED'
-        AND srctostdvm.target_standard_concept = 'S'
-        AND srctostdvm.target_invalid_reason IS NULL
-INNER JOIN {{ ref('source_to_source_vocab_map') }} AS srctosrcvm
-    ON srctosrcvm.source_code = c.code
-        AND srctosrcvm.source_vocabulary_id = 'SNOMED'
-        AND srctosrcvm.source_domain_id = 'Condition'
+{{ map_src_to_std_vocab(alias="srctostdvm", from="c", target_domain_id="Condition", target_vocabulary_id="SNOMED", source_vocabulary_id="SNOMED") }}
+{{ map_src_to_src_vocab(alias="srctosrcvm", from="c", source_vocabulary_id="SNOMED", source_domain_id="Condition") }}
