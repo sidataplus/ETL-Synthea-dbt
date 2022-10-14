@@ -20,7 +20,7 @@ SELECT
     srctosrcvm.source_concept_id AS device_source_concept_id,
     cast(NULL AS int) AS unit_concept_id,
     NULL AS unit_source_value,
-    cast(NULL AS int) AS unit_source_concept_id,
+    cast(NULL AS int) AS unit_source_concept_id
 
 FROM {{ source('synthea', 'devices') }} AS d
 INNER JOIN {{ ref('source_to_standard_vocab_map') }} AS srctostdvm
